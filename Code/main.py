@@ -1,0 +1,1 @@
+# main script to train the network
