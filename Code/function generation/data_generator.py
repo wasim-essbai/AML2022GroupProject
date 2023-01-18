@@ -10,11 +10,15 @@ def identity_function(x):
     return x
 
 
-def constant_function(x):
-    return round(np.random.rand() * 20, 5)
+class constant_function:
+    def __init__(self):
+        self.value = round(np.random.rand() * 20, 5)
+
+    def get_value(self, x):
+        return self.value
 
 
-basic_functions = [identity_function, constant_function, np.exp, np.sin, np.square]
+basic_functions = [identity_function, constant_function, np.exp, np.sin, np.square, np.tan, np.log, np.absolute]
 operators = [np.add, np.subtract, np.divide, np.multiply, np.power]
 function_compositions = ['unary', 'binary']
 
@@ -36,7 +40,7 @@ def get_composition():
 
 def print_plot(f):
     plt.figure(figsize=(20, 8))
-    x = np.linspace(-10, 10.0, num=500)
+    x = np.linspace(-10, 10.0, num=300)
     y = f(x)
     plt.plot(x, y)
     plt.show()
@@ -88,8 +92,15 @@ f5 = FunctionNode(np.exp, False, f4, None, False)
 f6 = FunctionNode(np.sin, False, f4, None, False)
 f7 = FunctionNode(np.add, True, f5, f6, False)
 
-assert(sum(f7.compute_value(x_test) - test_function(x_test)) == 0)
+assert (sum(f7.compute_value(x_test) - test_function(x_test)) == 0)
 
-random_function = generate_function(None, 5)
+random_function = generate_function(None, 2)
 print_plot(random_function.compute_value)
+print(random_function.print_function())
 
+# Do generation with different depth level.
+# 100 basic functions (scaled) a*exp level = 0
+
+# 300 combined functions  level = 1
+
+# 600 more general level = 2
