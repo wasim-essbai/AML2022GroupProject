@@ -21,3 +21,15 @@ class FunctionNode:
             x = self.f(a)
 
         return x
+
+    def print_function(self):
+        name = 'x'
+        if self.is_leaf:
+            return name
+
+        if self.is_binary:
+            name = '(' + self.child1.print_function() + ' ' + self.f.__name__ + ' ' + self.child2.print_function() + ')'
+        else:
+            name = self.f.__name__ + '(' + self.child1.print_function() + ')'
+
+        return name
