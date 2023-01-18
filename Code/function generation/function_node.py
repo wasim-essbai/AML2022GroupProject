@@ -1,4 +1,3 @@
-
 class FunctionNode:
     def __init__(self, fun, is_binary, child1, child2, is_leaf):
         self.child1 = child1
@@ -15,10 +14,16 @@ class FunctionNode:
         if self.is_binary:
             a = self.child1.compute_value(value)
             b = self.child2.compute_value(value)
-            x = self.f(a, b)
+            try:
+                x = self.f(a, b)
+            except ZeroDivisionError:
+                x = None
         else:
             a = self.child1.compute_value(value)
-            x = self.f(a)
+            try:
+                x = self.f(a)
+            except ZeroDivisionError:
+                x = None
 
         return x
 
