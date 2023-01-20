@@ -17,7 +17,7 @@ class ConstantFunction:
     def __init__(self, value):
         self.value = value
         if value is None:
-            self.value = round(random.uniform(-1, 1) * 20, 5)
+            self.value = round(random.uniform(-1, 1) * 5, 5)
 
     def constant(self, x):
         return self.value
@@ -49,12 +49,14 @@ def get_composition():
     return function_compositions[n]
 
 
-def save_plot(f, name):
+def save_plot(f, figure_name):
     plt.figure(figsize=(20, 8))
     x = np.linspace(-10, 10.0, num=500)
     y = f(x)
     plt.plot(y)
-    plt.savefig('./function generation/generated_dataset/' + name + '.png')
+    plt.xticks([])
+    plt.yticks([])
+    plt.savefig('./function generation/generated_dataset/' + figure_name + '.png')
     plt.close()
 
 
@@ -63,6 +65,7 @@ def is_in_list(a, list):
         if a == elem:
             return True
     return False
+
 
 def set_constant_function():
     constant_node = FunctionNode(None, None, None, None, False)
@@ -115,7 +118,7 @@ def generate_function(composition, level, only_basic):
 # 600 more general level = 2
 line = np.linspace(-10, 10.0, num=500)
 
-dataset_size = 1000
+dataset_size = 2000
 generated_functions = []
 
 gen_f = generate_function('unary', 1, True)
@@ -124,7 +127,7 @@ i = 0
 num_constants = 0
 while i < int(0.1 * dataset_size):
     try:
-        gen_f = generate_function('unary', 1, True)
+        gen_f = generate_function(None, 1, True)
         if num_constants > int(0.01 * dataset_size):
             continue
         if is_in_list(gen_f.print_function, generated_functions):
