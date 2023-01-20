@@ -54,6 +54,12 @@ def save_plot(f, name):
     x = np.linspace(-10, 10.0, num=500)
     y = f(x)
     plt.plot(y)
+    
+    ################### set x axis and y axis to the limits -10,10
+    plt.xlim((-10,10))
+    plt.ylim((-10,10))
+    ###################
+
     plt.savefig('./function generation/generated_dataset/' + name + '.png')
     plt.close()
 
