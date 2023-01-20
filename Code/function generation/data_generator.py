@@ -20,7 +20,7 @@ class ConstantFunction:
             self.value = round(random.uniform(-1, 1) * 5, 5)
 
     def constant(self, x):
-        return self.value
+        return np.ones(x.shape) * self.value
 
 
 basic_functions = [identity_function, np.exp, np.sin, np.square, np.tan, np.log, np.absolute]
@@ -30,7 +30,7 @@ function_compositions = ['unary', 'binary']
 
 
 def get_function_type():
-    n = np.random.choice(np.arange(0, 2), p=[0.02, 0.98])
+    n = np.random.choice(np.arange(0, 2), p=[0.03, 0.97])
     return function_types[n]
 
 
@@ -93,6 +93,9 @@ def generate_function(composition, level, only_basic):
         else:
             function_node.child1 = generate_function('unary', level - 1, only_basic)
         function_node.child2 = generate_function('unary', level - 1, only_basic)
+        if(function_node.child1.__eq__(function_node.child2)
+                and (operator == 'subtract' or operator == 'true_division')):
+            function_node = set_constant_function()
 
     if composition == 'unary':
         function_type = get_function_type();
@@ -118,7 +121,7 @@ def generate_function(composition, level, only_basic):
 # 600 more general level = 2
 line = np.linspace(-10, 10.0, num=500)
 
-dataset_size = 2000
+dataset_size = 1000
 generated_functions = []
 
 gen_f = generate_function('unary', 1, True)
