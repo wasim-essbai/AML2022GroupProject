@@ -121,7 +121,7 @@ def generate_function(composition, level, only_basic):
 # 600 more general level = 2
 line = np.linspace(-10, 10.0, num=500)
 
-dataset_size = 1000
+dataset_size = 4000
 generated_functions = []
 
 gen_f = generate_function('unary', 1, True)
