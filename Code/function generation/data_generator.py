@@ -60,8 +60,8 @@ def save_plot(f, figure_name):
     plt.close()
 
 
-def is_in_list(a, list):
-    for elem in list:
+def is_in_list(a, list_to_check):
+    for elem in list_to_check:
         if a == elem:
             return True
     return False
