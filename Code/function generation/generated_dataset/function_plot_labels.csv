@@ -1,0 +1,100 @@
+1-(constant(x) true_divide absolute(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,2,5,13
+2-exp(identity_function(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,8,7
+3-square((constant(x) add x)).png,6,7,6,7,6,7,6,7,6,7,6,10,0,5,7
+4-(constant(x) true_divide absolute(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,2,5,13
+5-(constant(x) subtract absolute(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,1,5,13
+6-sin((constant(x) multiply x)).png,6,7,6,7,6,7,6,7,6,7,6,9,3,5,7
+7-(constant(x) power sin(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,4,5,9
+8-tan(sin(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,11,9
+9-exp((constant(x) true_divide x)).png,6,7,6,7,6,7,6,7,6,7,6,8,2,5,7
+10-sin(exp(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,9,8
+11-identity_function((x add x)).png,6,7,6,7,6,7,6,7,6,7,6,7,0,7,7
+12-(sin(x) true_divide absolute(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,2,9,13
+13-square(identity_function(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,10,7
+14-exp(identity_function(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,8,7
+15-(tan(x) true_divide identity_function(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,2,11,7
+16-(identity_function(x) true_divide absolute(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,2,7,13
+17-sin((x add x)).png,6,7,6,7,6,7,6,7,6,7,6,9,0,7,7
+18-absolute(tan(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,13,11
+19-(identity_function(x) multiply tan(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,3,7,11
+20-constant(x).png,6,7,6,7,6,7,6,7,6,7,6,7,6,7,5
+21-(square(x) multiply identity_function(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,3,10,7
+22-tan(exp(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,11,8
+23-square(absolute(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,10,13
+24-sin(absolute(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,9,13
+25-(exp(x) true_divide sin(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,2,8,9
+26-square(exp(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,10,8
+27-square((x add x)).png,6,7,6,7,6,7,6,7,6,7,6,10,0,7,7
+28-log((x multiply x)).png,6,7,6,7,6,7,6,7,6,7,6,12,3,7,7
+29-(square(x) power square(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,4,10,10
+30-absolute(absolute(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,13,13
+31-(exp(x) true_divide square(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,2,8,10
+32-(identity_function(x) multiply tan(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,3,7,11
+33-exp(tan(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,8,11
+34-identity_function(sin(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,7,9
+35-constant(x).png,6,7,6,7,6,7,6,7,6,7,6,7,6,7,5
+36-(exp(x) power absolute(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,4,8,13
+37-identity_function((x add x)).png,6,7,6,7,6,7,6,7,6,7,6,7,0,7,7
+38-identity_function((x multiply x)).png,6,7,6,7,6,7,6,7,6,7,6,7,3,7,7
+39-exp(identity_function(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,6,8,7
+40-(square(x) subtract exp(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,1,10,8
+41-(constant(x) multiply identity_function(tan(x))).png,6,7,6,7,6,7,6,7,6,7,3,5,6,7,11
+42-(sin(tan(x)) add constant(x)).png,6,7,6,7,6,7,6,7,6,7,0,6,9,11,5
+43-square(tan(exp(x))).png,6,7,6,7,6,7,6,7,6,7,6,10,6,11,8
+44-sin((tan(x) add identity_function(x))).png,6,7,6,7,6,7,6,7,6,7,6,9,0,11,7
+45-(constant(x) subtract tan(square(x))).png,6,7,6,7,6,7,6,7,6,7,1,5,6,11,10
+46-sin((identity_function(x) add identity_function(x))).png,6,7,6,7,6,7,6,7,6,7,6,9,0,7,7
+47-identity_function(square((x add x))).png,6,7,6,7,6,7,6,7,6,7,6,10,0,7,7
+48-(constant(x) subtract exp(square(x))).png,6,7,6,7,6,7,6,7,6,7,1,5,6,8,10
+49-(identity_function(absolute(x)) true_divide constant(x)).png,6,7,6,7,6,7,6,7,6,7,2,6,7,13,5
+50-sin(square(square(x))).png,6,7,6,7,6,7,6,7,6,7,6,9,6,10,10
+51-(identity_function(absolute(x)) true_divide square((x multiply x))).png,6,7,6,7,6,7,2,6,7,13,6,10,3,7,7
+52-square((identity_function(x) subtract exp(x))).png,6,7,6,7,6,7,6,7,6,7,6,10,1,7,8
+53-(log((x multiply x)) add constant(x)).png,6,7,6,7,6,7,6,7,0,6,12,3,7,7,5
+54-(constant(x) subtract sin((x multiply x))).png,6,7,6,7,6,7,6,7,1,5,6,9,3,7,7
+55-(square((x multiply x)) multiply constant(x)).png,6,7,6,7,6,7,6,7,3,6,10,3,7,7,5
+56-(constant(x) subtract identity_function(sin(x))).png,6,7,6,7,6,7,6,7,6,7,1,5,6,7,9
+57-sin(tan(absolute(x))).png,6,7,6,7,6,7,6,7,6,7,6,9,6,11,13
+58-log((absolute(x) multiply exp(x))).png,6,7,6,7,6,7,6,7,6,7,6,12,3,13,8
+59-(tan((x add x)) true_divide tan(absolute(x))).png,6,7,6,7,6,7,2,6,11,0,7,7,6,11,13
+60-exp((tan(x) subtract sin(x))).png,6,7,6,7,6,7,6,7,6,7,6,8,1,11,9
+61-(log(square(x)) add absolute(tan(x))).png,6,7,6,7,6,7,6,7,0,6,12,10,6,13,11
+62-log((absolute(x) power identity_function(x))).png,6,7,6,7,6,7,6,7,6,7,6,12,4,13,7
+63-constant(x).png,6,7,6,7,6,7,6,7,6,7,6,7,6,7,5
+64-(identity_function(tan(x)) add tan(square(x))).png,6,7,6,7,6,7,6,7,0,6,7,11,6,11,10
+65-identity_function((absolute(x) multiply square(x))).png,6,7,6,7,6,7,6,7,6,7,6,7,3,13,10
+66-(constant(x) add exp(sin(x))).png,6,7,6,7,6,7,6,7,6,7,0,5,6,8,9
+67-sin((tan(x) subtract sin(x))).png,6,7,6,7,6,7,6,7,6,7,6,9,1,11,9
+68-constant(x).png,6,7,6,7,6,7,6,7,6,7,6,7,6,7,5
+69-sin((square(x) multiply tan(x))).png,6,7,6,7,6,7,6,7,6,7,6,9,3,10,11
+70-exp(tan((x add x))).png,6,7,6,7,6,7,6,7,6,8,6,11,0,7,7
+71-(identity_function(sin(x)) subtract sin(square(x))).png,6,7,6,7,6,7,6,7,1,6,7,9,6,9,10
+72-constant(x).png,6,7,6,7,6,7,6,7,6,7,6,7,6,7,5
+73-(absolute(absolute(x)) true_divide identity_function(identity_function(x))).png,6,7,6,7,6,7,6,7,2,6,13,13,6,7,7
+74-(sin(tan(x)) subtract constant(x)).png,6,7,6,7,6,7,6,7,6,7,1,6,9,11,5
+75-identity_function(identity_function((x add x))).png,6,7,6,7,6,7,6,7,6,7,6,7,0,7,7
+76-constant(x).png,6,7,6,7,6,7,6,7,6,7,6,7,6,7,5
+77-log(absolute(square(x))).png,6,7,6,7,6,7,6,7,6,7,6,12,6,13,10
+78-absolute(absolute((x add x))).png,6,7,6,7,6,7,6,7,6,13,6,13,0,7,7
+79-(sin(absolute(x)) multiply identity_function((x add x))).png,6,7,6,7,6,7,3,6,9,13,6,7,0,7,7
+80-(exp((x multiply x)) power constant(x)).png,6,7,6,7,6,7,6,7,4,6,8,3,7,7,5
+81-(tan(exp(x)) true_divide constant(x)).png,6,7,6,7,6,7,6,7,6,7,2,6,11,8,5
+82-constant(x).png,6,7,6,7,6,7,6,7,6,7,6,7,6,7,5
+83-exp(tan((x add x))).png,6,7,6,7,6,7,6,7,6,8,6,11,0,7,7
+84-square((absolute(x) multiply tan(x))).png,6,7,6,7,6,7,6,7,6,7,6,10,3,13,11
+85-identity_function(absolute(exp(x))).png,6,7,6,7,6,7,6,7,6,7,6,7,6,13,8
+86-(tan((x add x)) true_divide identity_function(identity_function(x))).png,6,7,6,7,6,7,2,6,11,0,7,7,6,7,7
+87-log(exp(sin(x))).png,6,7,6,7,6,7,6,7,6,7,6,12,6,8,9
+88-(absolute(square(x)) true_divide constant(x)).png,6,7,6,7,6,7,6,7,6,7,2,6,13,10,5
+89-constant(x).png,6,7,6,7,6,7,6,7,6,7,6,7,6,7,5
+90-(identity_function(exp(x)) true_divide constant(x)).png,6,7,6,7,6,7,6,7,6,7,2,6,7,8,5
+91-absolute((absolute(x) subtract tan(x))).png,6,7,6,7,6,7,6,7,6,7,6,13,1,13,11
+92-(identity_function(identity_function(x)) multiply sin(identity_function(x))).png,6,7,6,7,6,7,6,7,3,6,7,7,6,9,7
+93-(sin(exp(x)) true_divide square(sin(x))).png,6,7,6,7,6,7,6,7,2,6,9,8,6,10,9
+94-(exp(identity_function(x)) subtract square((x add x))).png,6,7,6,7,6,7,1,6,8,7,6,10,0,7,7
+95-(constant(x) multiply constant(x)).png,6,7,6,7,6,7,6,7,6,7,6,7,3,5,5
+96-identity_function((square(x) true_divide sin(x))).png,6,7,6,7,6,7,6,7,6,7,6,7,2,10,9
+97-square(identity_function((x multiply x))).png,6,7,6,7,6,7,6,7,6,10,6,7,3,7,7
+98-(tan(square(x)) subtract identity_function(tan(x))).png,6,7,6,7,6,7,6,7,1,6,11,10,6,7,11
+99-exp(identity_function(absolute(x))).png,6,7,6,7,6,7,6,7,6,7,6,8,6,7,13
+100-(tan((x multiply x)) multiply constant(x)).png,6,7,6,7,6,7,6,7,3,6,11,3,7,7,5
