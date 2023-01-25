@@ -133,6 +133,7 @@ with torch.no_grad():
         (x, y) = (x.to(device), y.to(device))
         x = x.float()
         y = y.float()
+        y = y.squeeze(1)
 
         x = x.permute(0, 3, 1, 2)
 
