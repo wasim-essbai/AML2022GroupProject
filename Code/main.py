@@ -1,9 +1,3 @@
-import matplotlib
-import torchvision
-from torchvision.transforms import ToTensor
-import numpy as np
-
-matplotlib.use("Agg")
 from frC_net import FrCNet
 from torch.utils.data import DataLoader, random_split
 from torch.optim import Adam
@@ -12,6 +6,8 @@ from function_generation.functions_dataset import FunctionsDataset
 import torch
 import time
 import utils
+import matplotlib
+matplotlib.use("Agg")
 
 # define training hyperparameters
 INIT_LR = 1e-3
@@ -19,8 +15,8 @@ EPOCHS = 10
 
 # define the train and val splits
 TRAIN_SPLIT = 0.70
-TEST_SPLIT = (1 - TRAIN_SPLIT) * 0.5
 VAL_SPLIT = (1 - TRAIN_SPLIT) * 0.5
+TEST_SPLIT = (1 - TRAIN_SPLIT) * 0.5
 
 # set the device we will be using to train the model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")

@@ -74,8 +74,8 @@ def get_composition():
 
 
 def save_plot(f, figure_name):
-    plt.figure(figsize=(10, 4))
-    x = np.linspace(-10, 10.0, num=500)
+    plt.figure(figsize=(7, 4))
+    x = np.linspace(-8, 8, num=400)
     y = f(x)
     plt.plot(y)
     plt.xticks([])
@@ -164,7 +164,7 @@ def generate_function(composition, level, only_basic):
 # 30% combined functions  level = 1
 # 50% more general level = 2
 
-line = np.linspace(-10, 10.0, num=500)
+line = np.linspace(-8, 8, num=400)
 
 dataset_size = 100
 generated_functions = []

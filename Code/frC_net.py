@@ -19,7 +19,7 @@ class FrCNet(Module):
         self.relu2 = ReLU()
         self.max_pool2 = MaxPool2d(kernel_size=(2, 2), stride=(2, 2))
         # initialize first (and only) set of FC => RELU layers
-        self.fc1 = Linear(in_features=1197950, out_features=10)
+        self.fc1 = Linear(in_features=834200, out_features=10)
         self.relu3 = ReLU()
         # initialize our softmax classifier
         self.fc2 = Linear(in_features=10, out_features=classes)
