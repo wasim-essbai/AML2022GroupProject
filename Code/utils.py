@@ -13,7 +13,7 @@ VAL_SPLIT = 1 - TRAIN_SPLIT - TEST_SPLIT
 
 
 def get_data():
-    data_dir = './function generation/generated_dataset'
+    data_dir = 'function_generation/generated_dataset'
 
     transform = transforms.Compose([
         # transforms.RandomRotation(20),
