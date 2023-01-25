@@ -80,7 +80,7 @@ def save_plot(f, figure_name):
     plt.plot(y)
     plt.xticks([])
     plt.yticks([])
-    plt.savefig('./function generation/generated_dataset/data/' + figure_name + '.png')
+    plt.savefig('./function_generation/generated_dataset/data/' + figure_name + '.png')
     plt.close()
 
 
@@ -167,7 +167,7 @@ line = np.linspace(-10, 10.0, num=500)
 
 dataset_size = 100
 generated_functions = []
-labels = []
+labels = ['image_name', 'f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12', 'f13', 'f14']
 
 num_constants = 0
 i = 0
@@ -245,6 +245,6 @@ for elem in labels:
     if len(elem) != LABEL_DIM + 1:
         print('wrong')
 
-with open('./function generation/generated_dataset/function_plot_labels.csv', 'w', newline='') as file:
+with open('./function_generation/generated_dataset/function_plot_labels.csv', 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerows(labels)
