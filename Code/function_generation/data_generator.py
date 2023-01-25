@@ -2,7 +2,7 @@ import random
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
-
+import os
 from function_node import FunctionNode
 
 np.seterr(all='raise')
@@ -54,7 +54,7 @@ function_compositions = ['unary', 'binary']
 
 
 def get_function_type():
-    n = np.random.choice(np.arange(0, 2), p=[0.001, 0.999])
+    n = np.random.choice(np.arange(0, 2), p=[0.0001, 0.9999])
     return function_types[n]
 
 
@@ -74,13 +74,14 @@ def get_composition():
 
 
 def save_plot(f, figure_name):
-    plt.figure(figsize=(20, 8))
+    plt.figure(figsize=(10, 4))
     x = np.linspace(-10, 10.0, num=500)
     y = f(x)
     plt.plot(y)
     plt.xticks([])
     plt.yticks([])
-    plt.savefig('./function_generation/generated_dataset/data/' + figure_name + '.png')
+    plt.tight_layout()
+    plt.savefig('./generated_dataset/data/' + figure_name + '.png')
     plt.close()
 
 
@@ -167,14 +168,14 @@ line = np.linspace(-10, 10.0, num=500)
 
 dataset_size = 100
 generated_functions = []
-labels = ['image_name', 'f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12', 'f13', 'f14']
+labels = [['image_name', 'f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12', 'f13', 'f14']]
 
 num_constants = 0
 i = 0
 while i < int(0.1 * dataset_size):
     try:
         gen_f = generate_function(None, 2, True)
-        if num_constants > int(0.06 * dataset_size):
+        if num_constants > int(0.06 * dataset_size) and gen_f.f.__name__ == 'constant':
             continue
         if is_in_list(gen_f.print_function, generated_functions):
             continue
@@ -198,7 +199,7 @@ num_constants = 0
 while i < int(0.3 * dataset_size):
     try:
         gen_f = generate_function(None, 2, False)
-        if num_constants > int(0.06 * dataset_size):
+        if num_constants > int(0.06 * dataset_size) and gen_f.f.__name__ == 'constant':
             continue
         if is_in_list(gen_f.print_function, generated_functions):
             continue
@@ -222,8 +223,7 @@ num_constants = 0
 while i < int(0.6 * dataset_size):
     try:
         gen_f = generate_function(None, 3, False)
-        if num_constants > int(0.06 * dataset_size):
-            print(num_constants)
+        if num_constants > int(0.06 * dataset_size) and gen_f.f.__name__ == 'constant':
             continue
         if is_in_list(gen_f.print_function, generated_functions):
             continue
@@ -245,6 +245,6 @@ for elem in labels:
     if len(elem) != LABEL_DIM + 1:
         print('wrong')
 
-with open('./function_generation/generated_dataset/function_plot_labels.csv', 'w', newline='') as file:
+with open('./generated_dataset/function_plot_labels.csv', 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerows(labels)
