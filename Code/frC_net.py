@@ -1,4 +1,4 @@
-from torch.nn import Module
+from torch.nn import Module, AdaptiveMaxPool2d
 from torch.nn import Conv2d
 from torch.nn import Linear
 from torch.nn import MaxPool2d
@@ -19,10 +19,10 @@ class FrCNet(Module):
         self.relu2 = ReLU()
         self.max_pool2 = MaxPool2d(kernel_size=(2, 2), stride=(2, 2))
         # initialize first (and only) set of FC => RELU layers
-        self.fc1 = Linear(in_features=800, out_features=500)
+        self.fc1 = Linear(in_features=1197950, out_features=10)
         self.relu3 = ReLU()
         # initialize our softmax classifier
-        self.fc2 = Linear(in_features=500, out_features=classes)
+        self.fc2 = Linear(in_features=10, out_features=classes)
         self.logSoftmax = LogSoftmax(dim=1)
 
     def forward(self, x):

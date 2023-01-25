@@ -5,7 +5,7 @@ from torch.utils.data import random_split
 from torch.utils.data import DataLoader
 
 # define training hyperparameters
-BATCH_SIZE = 40
+BATCH_SIZE = 10
 # define the train and val splits
 TRAIN_SPLIT = 0.70
 TEST_SPLIT = 0.15
