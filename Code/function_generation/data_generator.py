@@ -73,14 +73,14 @@ def get_composition():
 
 
 def save_plot(f, figure_name):
-    plt.figure(figsize=(7, 4))
+    plt.figure(figsize=(2.5, 1))
     x = np.linspace(-8, 8, num=400)
     y = f(x)
     plt.plot(y)
     plt.xticks([])
     plt.yticks([])
     plt.tight_layout()
-    plt.savefig('./generated_dataset/data/' + figure_name + '.png')
+    plt.savefig('./reduced_generated_dataset/data/' + figure_name + '.png')
     plt.close()
 
 
@@ -88,6 +88,7 @@ def add_label(figure_name, label_code):
     identity_f_code = basic_functions_encoding[identity_function.__name__]
     while len(label_code) != LABEL_DIM:
         label_code = [6, identity_f_code] + label_code
+    label_code = label_code[::-1]
     label = [figure_name + '.png'] + label_code
     labels.append(label)
 
@@ -165,7 +166,7 @@ def generate_function(composition, level, only_basic):
 
 line = np.linspace(-8, 8, num=400)
 
-dataset_size = 100
+dataset_size = 1000
 generated_functions = []
 labels = [['image_name', 'f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12', 'f13', 'f14']]
 
@@ -191,7 +192,6 @@ while i < int(0.1 * dataset_size):
         i = i + 1
 
 print(str(len(generated_functions)) + ' functions generated')
-print(generated_functions)
 
 i = 0
 num_constants = 0
@@ -215,7 +215,6 @@ while i < int(0.3 * dataset_size):
         i = i + 1
 
 print(str(len(generated_functions)) + ' functions generated')
-print(generated_functions)
 
 i = 0
 num_constants = 0
@@ -244,6 +243,6 @@ for elem in labels:
     if len(elem) != LABEL_DIM + 1:
         print('wrong')
 
-with open('./generated_dataset/function_plot_labels.csv', 'w', newline='') as file:
+with open('./reduced_generated_dataset/function_plot_labels.csv', 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerows(labels)

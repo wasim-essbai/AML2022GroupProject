@@ -1,4 +1,5 @@
 from frC_net import FrCNet
+from torch.autograd.grad_mode import F
 from torch.utils.data import DataLoader, random_split
 from torch.optim import Adam
 from torch import nn
@@ -8,6 +9,11 @@ import time
 import utils
 import matplotlib
 matplotlib.use("Agg")
+
+import os
+os.chdir('/content/drive/MyDrive/AML2022GroupProject/Code')
+# dataset choice
+full = False
 
 # define training hyperparameters
 INIT_LR = 1e-3
@@ -22,8 +28,12 @@ TEST_SPLIT = (1 - TRAIN_SPLIT) * 0.5
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 print("[INFO] loading the full dataset...")
-full_function_dataset = FunctionsDataset(csv_file='./function_generation/generated_dataset/function_plot_labels.csv',
+if full:
+  full_function_dataset = FunctionsDataset(csv_file='./function_generation/generated_dataset/function_plot_labels.csv',
                                          root_dir='./function_generation/generated_dataset/data/')
+else:
+  full_function_dataset = FunctionsDataset(csv_file='./function_generation/reduced_generated_dataset/function_plot_labels.csv',
+                                         root_dir='./function_generation/reduced_generated_dataset/data/')
 print("Dataset length: ", len(full_function_dataset))
 
 # calculate the train/validation split
@@ -93,6 +103,7 @@ for e in range(0, EPOCHS):
         x = x.float()
         y = y.float()
         y = y.squeeze(1)
+        y_ex = y * 100
 
         # From: [batch_size, height, width, channels]
         # To: [batch_size, channels, height, width]
@@ -100,7 +111,7 @@ for e in range(0, EPOCHS):
 
         # perform a forward pass and calculate the training loss
         pred = model(x)
-        loss = lossFn(pred, y)
+        loss = lossFn(pred, y_ex)
 
         # zero out the gradients, perform the backpropagation step,
         # and update the weights
@@ -110,10 +121,10 @@ for e in range(0, EPOCHS):
 
         # add the loss to the total training loss so far and
         # calculate the number of correct predictions
-        pred = torch.round(pred * 13)
+        pred = torch.round(pred / 100)
         totalTrainLoss += loss
-        for j in range(len(y) - 5):
-            trainCorrect += 1 if (pred[j] == y[j]).sum().item() == 10 else 0
+        for j in range(len(y) - 4):
+            trainCorrect += 1 if (pred[j] == y[j]).sum().item() == 11 else 0
 
 # switch off autograd for evaluation
 with torch.no_grad():
@@ -130,18 +141,20 @@ with torch.no_grad():
         x = x.float()
         y = y.float()
         y = y.squeeze(1)
+        y_ex = y * 100
 
         x = x.permute(0, 3, 1, 2)
 
         # make the predictions and calculate the validation loss
         pred = model(x)
 
-        pred = torch.round(pred * 13)
-        totalValLoss += lossFn(pred, y)
-        # calculate the number of correct predictions
-        for j in range(len(y)):
-            valCorrect += 1 if (pred[j] == y[j]).sum().item() == 15 else 0
+        pred = torch.round(pred / 100)
 
+        totalValLoss += lossFn(pred, y_ex)
+        # calculate the number of correct predictions
+        for j in range(len(y) - 4):
+            valCorrect += 1 if (pred[j] == y[j]).sum().item() == 11 else 0
+    #
     # calculate the average training and validation loss
     avgTrainLoss = totalTrainLoss / trainSteps
     avgValLoss = totalValLoss / valSteps
