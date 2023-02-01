@@ -1,0 +1,1 @@
+!python /content/drive/MyDrive/AML2022GroupProject/Code/main.py
