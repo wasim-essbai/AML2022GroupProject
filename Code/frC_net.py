@@ -1,4 +1,4 @@
-from torch.nn import Module, AdaptiveMaxPool2d
+from torch.nn import Module, AdaptiveMaxPool2d, Softmax
 from torch.nn import Conv2d
 from torch.nn import Linear
 from torch.nn import MaxPool2d
@@ -8,7 +8,7 @@ from torch import flatten
 
 
 class FrCNet(Module):
-    def __init__(self, numChannels, classes):
+    def __init__(self, numChannels, output_size):
         super(FrCNet, self).__init__()
         # initialize first set of CONV => RELU => POOL layers
         self.conv1 = Conv2d(in_channels=numChannels, out_channels=20, kernel_size=(5, 5))
@@ -19,11 +19,11 @@ class FrCNet(Module):
         self.relu2 = ReLU()
         self.max_pool2 = MaxPool2d(kernel_size=(2, 2), stride=(2, 2))
         # initialize first (and only) set of FC => RELU layers
-        self.fc1 = Linear(in_features=834200, out_features=10)
+        self.fc1 = Linear(in_features=834200, out_features=130)
         self.relu3 = ReLU()
         # initialize our softmax classifier
-        self.fc2 = Linear(in_features=10, out_features=classes)
-        self.logSoftmax = LogSoftmax(dim=1)
+        self.fc2 = Linear(in_features=130, out_features=output_size)
+        self.activation4 = Softmax(dim=1)
 
     def forward(self, x):
         # pass the input through our first set of CONV => RELU => POOL layers
@@ -41,6 +41,6 @@ class FrCNet(Module):
         x = self.relu3(x)
         # pass the output to our softmax classifier to get our output predictions
         x = self.fc2(x)
-        output = self.logSoftmax(x)
+        output = self.activation4(x)
 
         return output

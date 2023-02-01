@@ -50,7 +50,7 @@ valSteps = len(valDataLoader.dataset) // utils.BATCH_SIZE
 print("[INFO] initializing the FrCNet model...")
 model = FrCNet(
     numChannels=4,
-    classes=15).to(device)
+    output_size=15).to(device)
 
 # initialize our optimizer and loss function
 opt = Adam(model.parameters(), lr=INIT_LR)
@@ -110,10 +110,10 @@ for e in range(0, EPOCHS):
 
         # add the loss to the total training loss so far and
         # calculate the number of correct predictions
-        pred = torch.round(pred)
+        pred = torch.round(pred * 13)
         totalTrainLoss += loss
-        for j in range(len(y)):
-            trainCorrect += 1 if (pred[j] == y[j]).sum().item() == 15 else 0
+        for j in range(len(y) - 5):
+            trainCorrect += 1 if (pred[j] == y[j]).sum().item() == 10 else 0
 
 # switch off autograd for evaluation
 with torch.no_grad():
@@ -135,6 +135,8 @@ with torch.no_grad():
 
         # make the predictions and calculate the validation loss
         pred = model(x)
+
+        pred = torch.round(pred * 13)
         totalValLoss += lossFn(pred, y)
         # calculate the number of correct predictions
         for j in range(len(y)):
