@@ -1,0 +1,42 @@
+When nonidealities are taken into account the circuit looks like in figure \Fig~\ref{fig:CompleteCircuit}. The main effects analyzed are the ones due to $V_{os} \neq 0$, finite op-amp gain $A$, charge injection by S3 when opened, parasitic capacitances to ground $C_P$ and the quatization error of the DAC $\epsilon = \pm \frac{1}{2}LSB$.
+
+\textbf{Quantization Error \& Voltage Offset}
+
+Applying the super position principle is possible to find that the presence of quatization error and voltage offset of the op-amp leads to $V_x = V_{os} \pm \frac{1}{2}LSB(\frac{C_C}{C_{total}})$ when S3 is opened and to $V_x = V_{os}$ when S3 is closed.<, with $C_{total} = C_P + C_C + C_R + C_S$. $\frac{C_C}{C_{total}}$ is capacitive divider, so errors in $V_{DAC}$, in the worst case, could accumulate.
+
+\textbf{Charge Injection}
+
+This is an important effect to take into account since it affects the charge conservation assumption made in the first analysis.
+
+To mitigate this problem, a calibration phase is done, where the injected charge is measured to be canceled. After calibration, the measurment steps come as in the ideal analysis.
+Calibration and measurement phases inherently eliminate the op-amp offset with the closed-loop configuration, while for the open-loop this should be done separately and could lead to problems when $V_{os}$ is so large that the calibration voltage is greater than the DAC maximum voltage.
+
+The calibration is done by setting S1 to $V_{ref}$, S2 and $V_{DAC}$ to GND. Now S3 is opened to measure the charge injected $Q_{s3}$, so the coupling capacitor $C_C$ will store this charge $Q_{s3}$. The calibration voltage in output of the DAC is:
+\[V_{DAC_{cal}} = -\frac{Q_{s3}}{C_C} \pm 2\Delta V, \ where \ \pm\Delta V \ is \ the \ quantization \ error.\]
+This voltage can be now stored in a RAM.
+By applying $-V_{DAC_{cal}}$ to $C_C$ the voltage error due to charge injection can be canceled. An other approach would be to think about the DAC as generating a charge on $C_C$ to compensate the injected one.
+
+The measurement cycle is the same described previously except that $V_{DAC}$ is set to $V_{DAC_{cal}}$. At the end of this cycle the output is
+\[V_{DAC_{meas}} = \frac{V_{ref}(C_R - C_S)}{C_C} \pm 4\Delta V\]
+that is again the same, except of the term $\pm 4\Delta V$ given by the quantization error.
+
+The expression for capacitance mismatch ratio is given by
+\[\frac{\Delta C}{C} = \frac{V_{DAC_{meas}}}{V_{ref}}\frac{C_C}{C} \pm \frac{4\Delta V}{V_{ref}}\frac{C_C}{C}\]
+where $\Delta C = C_R - C_S$ and $C$ is any normalizing capacitance that could be $C_R$ by instance.
+
+The error term $\pm \frac{4\Delta V}{V_{ref}}\frac{C_C}{C}$ rappresents the limit of detection for capacitance change, that can be reduced by icreasing $V_{ref}$, if possible, or reducing $C_C$, being careful to relative changes in $\delta$.
+
+\textbf{Parasitic Capacitance}
+
+For this system, large parasitic capacitances has a double effect:
+\begin{enumerate}
+	\item Large $C_P$ affects the ratio $\delta= \frac{C_C}{C_{total}}$. A small $\delta$ would impede the DAC from adjusting $V_x$, since it would be affected mainly by the large value of $C_P$. The DAC has a minimum ammount of control that is $\delta (\pm \Delta V)$. If this ammount is smaller than the comparator resolution, the error term $\pm\Delta V$ becomes limited by $\delta$ and not from the quantization error anymore. This is something unwanted because increasing the DAC performances wouldn't give any significant improvement.
+	\item Large $C_P$ reduces the noise term $\frac{kT}{C}$.
+\end{enumerate}
+This leads to a trade-off on $C_P$ that must be evaluated for the specific application and performances requirements. Parastic capacitances effects can be mitigated with specific methods, e.g. \textit{Bootstrapping} if there is an electrical access. Another option is to use a comparator with higher resolution, to avoid absence of control by the DAC.
+
+\textbf{Other Nonidealities}
+
+When a MOS switch is used, a source of error is the reverse leakage current when the switch is open, that introduces extra charge. This effects becomes significant at low clock frequency since there would be more time to transfer charges. If the clock frequency is slow enought it's possible to measure the extra charge injected using the presented technique.
+
+Another source of error is given by the thermal noise from the MOS switch when is opened. It's possible to reduce it by increasing the input capacitance, but this would lead to the previous trade-off on $C_P$. In any case it's not possible to eliminate the noise completely for a single measure, but can be reduced by averaging multiple measures since it's modeled as a random noise with null average.
