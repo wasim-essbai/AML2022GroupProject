@@ -1,5 +1,4 @@
 from frC_net import FrCNet
-from torch.autograd.grad_mode import F
 from torch.utils.data import DataLoader, random_split
 from torch.optim import Adam
 from torch import nn
@@ -8,15 +7,14 @@ import torch
 import time
 import utils
 import matplotlib
+
 matplotlib.use("Agg")
 
-import os
-os.chdir('/content/drive/MyDrive/AML2022GroupProject/Code')
 # dataset choice
 full = False
 
 # define training hyperparameters
-INIT_LR = 1e-3
+INIT_LR = 0.001
 EPOCHS = 10
 
 # define the train and val splits
@@ -29,11 +27,19 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 print("[INFO] loading the full dataset...")
 if full:
-  full_function_dataset = FunctionsDataset(csv_file='./function_generation/generated_dataset/function_plot_labels.csv',
-                                         root_dir='./function_generation/generated_dataset/data/')
+    output_dim_file = open('./function_generation/generated_dataset/output_dim.txt', 'r')
+    output_dimension = int(output_dim_file.read())
+    full_function_dataset = FunctionsDataset(
+        csv_file='./function_generation/generated_dataset/function_plot_labels.csv',
+        root_dir='./function_generation/generated_dataset/data/',
+        label_dim=output_dimension)
 else:
-  full_function_dataset = FunctionsDataset(csv_file='./function_generation/reduced_generated_dataset/function_plot_labels.csv',
-                                         root_dir='./function_generation/reduced_generated_dataset/data/')
+    output_dim_file = open('./function_generation/mini_dataset/output_dim.txt', 'r')
+    output_dimension = int(output_dim_file.read())
+    full_function_dataset = FunctionsDataset(csv_file='./function_generation/mini_dataset/function_plot_labels.csv',
+                                             root_dir='./function_generation/mini_dataset/data/',
+                                             label_dim=output_dimension)
+
 print("Dataset length: ", len(full_function_dataset))
 
 # calculate the train/validation split
@@ -59,12 +65,12 @@ valSteps = len(valDataLoader.dataset) // utils.BATCH_SIZE
 # initialize the FrCNet model
 print("[INFO] initializing the FrCNet model...")
 model = FrCNet(
-    numChannels=4,
-    output_size=15).to(device)
+    numChannels=3,
+    output_size=output_dimension).to(device)
 
 # initialize our optimizer and loss function
 opt = Adam(model.parameters(), lr=INIT_LR)
-lossFn = nn.MSELoss()
+lossFn = nn.L1Loss()
 
 # initialize a dictionary to store training history
 H = {
@@ -78,6 +84,10 @@ H = {
 print("[INFO] training the network...")
 startTime = time.time()
 
+label_scaling = 1000000
+label_shift = 0
+
+print("Start training:")
 # loop over our epochs
 for e in range(0, EPOCHS):
     print("Start of epoch: ", e)
@@ -93,6 +103,9 @@ for e in range(0, EPOCHS):
     trainCorrect = 0
     valCorrect = 0
 
+    trainLevel = 0
+    trainLenght = len(trainDataLoader)
+    First = True
     # loop over the training set
     for sample in trainDataLoader:
         x = sample['image']
@@ -103,7 +116,7 @@ for e in range(0, EPOCHS):
         x = x.float()
         y = y.float()
         y = y.squeeze(1)
-        y_ex = y * 100
+        y_ex = (y + label_shift) * label_scaling
 
         # From: [batch_size, height, width, channels]
         # To: [batch_size, channels, height, width]
@@ -121,16 +134,21 @@ for e in range(0, EPOCHS):
 
         # add the loss to the total training loss so far and
         # calculate the number of correct predictions
-        pred = torch.round(pred / 100)
+        pred = torch.round((pred / label_scaling) - label_shift)
+
         totalTrainLoss += loss
-        for j in range(len(y) - 4):
-            trainCorrect += 1 if (pred[j] == y[j]).sum().item() == 11 else 0
+        for j in range(len(y)):
+            trainCorrect += 1 if utils.target_close(pred[j], y[j]) else 0
+        trainLevel += 1
+        print('\r' + str(round(100 * trainLevel / trainLenght, 1)) + '% complete..', end="")
+    print("Loss of epoch " + str(e) + " " + str(totalTrainLoss.item()))
 
 # switch off autograd for evaluation
 with torch.no_grad():
     # set the model in evaluation mode
     model.eval()
-
+    First = True
+    print("Start validation:")
     # loop over the validation set
     for sample in valDataLoader:
         x = sample['image']
@@ -141,20 +159,25 @@ with torch.no_grad():
         x = x.float()
         y = y.float()
         y = y.squeeze(1)
-        y_ex = y * 100
+        y_ex = (y + label_shift) * label_scaling
 
         x = x.permute(0, 3, 1, 2)
 
         # make the predictions and calculate the validation loss
         pred = model(x)
 
-        pred = torch.round(pred / 100)
-
         totalValLoss += lossFn(pred, y_ex)
+
+        pred = torch.round((pred / label_scaling) - label_shift)
+
         # calculate the number of correct predictions
-        for j in range(len(y) - 4):
-            valCorrect += 1 if (pred[j] == y[j]).sum().item() == 11 else 0
-    #
+        for j in range(len(y)):
+            if First:
+                print('Pred', pred[j])
+                print('Target', y[j])
+                First = False
+            valCorrect += 1 if utils.target_close(pred[j], y[j]) else 0
+
     # calculate the average training and validation loss
     avgTrainLoss = totalTrainLoss / trainSteps
     avgValLoss = totalValLoss / valSteps
@@ -180,3 +203,5 @@ with torch.no_grad():
     endTime = time.time()
     print("[INFO] total time taken to train the model: {:.2f}s".format(
         endTime - startTime))
+
+torch.save(model.state_dict(), './model/model.pth')

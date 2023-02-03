@@ -1,0 +1,15 @@
+A first analysis is performed assuming an ideal circuit, so there is no charge injection ($Q_{s3} = 0$), no parasitic capacitance ($C_P = 0$) and ideal op-amp (offset $V_{os} = 0$ and $\infty$ gain). The circuit becomes as showed in figure \Fig~\ref{fig:IdealCircuit}.
+
+\textbf{Step 1:} S3 closed, S1 to $V_{ref}$ and S2 to GND
+
+In this step the op-amp is in a buffer configuration, so $V_x = 0 = V_{out}$ for the virtual ground. The lower terminal con $C_R$ is set to $V_{ref}$ so there is a charge $Q_1 = -C_R V_{ref}$ in the upper terminal of $C_R$, that is $V_x$.
+
+\textbf{Step 2:} S3 opened, S1 to GND and S2 to $V_{ref}$
+
+In this step the feedback is only throught the branch of the SAR and DAC. Assuming the components ideal then there is again e negative feedback that sets $V_x = 0$. Similarly at the previous case, there is a charge $Q_2 = -C_S V_{ref} - C_C V_{DAC}$ in the upper terminal of $C_S$. The presence of $V_{DAC}$ is due to the fact that there isn't a buffer configuration anymore but charging amplifier.
+
+Now, since the charge must be conserved it holds that $Q_1 = Q_2$ that leads to $V_{DAC} = \frac{V_{ref}(C_R - C_S)}{C_C}$. 
+
+So this circuit produces a voltage proportional to the difference of $C_R \ and \ C_S$. $V_{ref},C_C$ can be choosen to exploit at best the range of the DAC.
+
+The circuit can be used either in a open-loop (without the feedback throught S3) or close-loop configuration. As expectable the second one offers more advantages in terms of voltage offset compensation. So this configuration will be anaylized in detail.

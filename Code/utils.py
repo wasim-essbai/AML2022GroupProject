@@ -4,7 +4,7 @@ from torch.utils.data import random_split
 from torch.utils.data import DataLoader
 
 # define training hyperparameters
-BATCH_SIZE = 128
+BATCH_SIZE = 512
 # define the train and val splits
 TRAIN_SPLIT = 0.70
 TEST_SPLIT = 0.15
@@ -15,9 +15,9 @@ def get_data():
     data_dir = 'function_generation/generated_dataset'
 
     transform = transforms.Compose([
-        # transforms.RandomRotation(20),
-        transforms.RandomResizedCrop(128),
-        # transforms.RandomHorizontalFlip(),
+        #transforms.RandomRotation(20),
+        #transforms.RandomResizedCrop(128),
+        #transforms.RandomHorizontalFlip(),
         transforms.ToTensor()])
 
     full_dataset = datasets.ImageFolder(data_dir, transform=transform)
@@ -39,3 +39,11 @@ def get_data_split(full_dataset):
                                                   generator=torch.Generator().manual_seed(42))
 
     return trainData, testData, valData
+
+
+def target_close(pred, y):
+    shift = 0
+    close = True
+    for i in range(len(y) - shift):
+        close = close and pred[i + shift] == y[i + shift]
+    return close

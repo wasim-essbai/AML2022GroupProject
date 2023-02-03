@@ -6,7 +6,7 @@ from function_node import FunctionNode
 
 np.seterr(all='raise')
 
-LABEL_DIM = 15
+LABEL_DIM = 0
 
 
 # Self defined math functions
@@ -80,17 +80,27 @@ def save_plot(f, figure_name):
     plt.xticks([])
     plt.yticks([])
     plt.tight_layout()
-    plt.savefig('./reduced_generated_dataset/data/' + figure_name + '.png')
+    plt.savefig('./mini_dataset/data/' + figure_name + '.png')
     plt.close()
 
 
 def add_label(figure_name, label_code):
+    global LABEL_DIM
+    if len(label_code) > LABEL_DIM:
+        LABEL_DIM = len(label_code)
+
+    label = [figure_name + '.png'] + label_code
+    labels.append(label)
+
+
+def add_padding_label(figure_name, label_code):
     identity_f_code = basic_functions_encoding[identity_function.__name__]
     while len(label_code) != LABEL_DIM:
         label_code = [6, identity_f_code] + label_code
     label_code = label_code[::-1]
-    label = [figure_name + '.png'] + label_code
-    labels.append(label)
+    label = [figure_name] + label_code
+    padded_labels.append(label)
+    return label
 
 
 def is_in_list(a, list_to_check):
@@ -126,20 +136,34 @@ def generate_function(composition, level, only_basic):
 
     if composition is None:
         composition = get_composition()
-    if composition == 'binary':
+    if composition == 'binary' and not only_basic:
         operator = get_operator()
         function_node.f = operator
         function_node.f_code = operators_encoding[operator.__name__]
         function_node.is_binary = True
 
-        if only_basic:
-            function_node.child1 = set_constant_function()
-        else:
-            function_node.child1 = generate_function('unary', level - 1, only_basic)
+        function_node.child1 = generate_function('unary', level - 1, only_basic)
         function_node.child2 = generate_function('unary', level - 1, only_basic)
+
         if (function_node.child1.__eq__(function_node.child2)
                 and (operator.__name__ == np.subtract.__name__ or operator.__name__ == np.divide.__name__)):
             function_node = set_constant_function()
+
+        if (function_node.child1.__eq__(function_node.child2)
+                and (operator.__name__ == np.add.__name__)):
+            function_node = function_node.child1
+
+        if (function_node.child1.__eq__(function_node.child2)
+                and (operator.__name__ == np.multiply.__name__)):
+            function_node.f = np.square
+            function_node.f_code = basic_functions_encoding[np.square.__name__]
+            function_node.is_binary = False
+            function_node.child2 = None
+
+        if function_node.child1.f.__name__ == 'constant' and function_node.child2.f.__name__ != 'constant':
+            function_node = function_node.child2
+        if function_node.child1.f.__name__ != 'constant' and function_node.child2.f.__name__ == 'constant':
+            function_node = function_node.child1
 
     if composition == 'unary':
         function_type = get_function_type()
@@ -166,15 +190,15 @@ def generate_function(composition, level, only_basic):
 
 line = np.linspace(-8, 8, num=400)
 
-dataset_size = 1000
+dataset_size = 10
 generated_functions = []
-labels = [['image_name', 'f0', 'f1', 'f2', 'f3', 'f4', 'f5', 'f6', 'f7', 'f8', 'f9', 'f10', 'f11', 'f12', 'f13', 'f14']]
-
+labels = []
+padded_labels = []
 num_constants = 0
 i = 0
 while i < int(0.1 * dataset_size):
     try:
-        gen_f = generate_function(None, 2, True)
+        gen_f = generate_function(None, 1, True)
         if num_constants > int(0.06 * dataset_size) and gen_f.f.__name__ == 'constant':
             continue
         if is_in_list(gen_f.print_function, generated_functions):
@@ -239,10 +263,22 @@ while i < int(0.6 * dataset_size):
 
 print(str(len(generated_functions)) + ' functions generated')
 
-for elem in labels:
+header = ['image_name']
+for i in range(LABEL_DIM):
+    header.append('f' + str(i))
+
+padded_labels.append(header)
+for j in range(len(labels)):
+    elem = labels[j]
+    elem = add_padding_label(elem[0], elem[1:])
     if len(elem) != LABEL_DIM + 1:
         print('wrong')
 
-with open('./reduced_generated_dataset/function_plot_labels.csv', 'w', newline='') as file:
+# saving label dimension
+file = open('./mini_dataset/output_dim.txt', 'w')
+file.write(str(LABEL_DIM))
+file.close()
+
+with open('./mini_dataset/function_plot_labels.csv', 'w', newline='') as file:
     writer = csv.writer(file)
-    writer.writerows(labels)
+    writer.writerows(padded_labels)
