@@ -190,7 +190,7 @@ def generate_function(composition, level, only_basic):
 
 line = np.linspace(-8, 8, num=400)
 
-dataset_size = 10
+dataset_size = 20
 generated_functions = []
 labels = []
 padded_labels = []
