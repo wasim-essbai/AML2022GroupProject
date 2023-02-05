@@ -15,7 +15,7 @@ full = False
 
 # define training hyperparameters
 INIT_LR = 0.001
-EPOCHS = 10
+EPOCHS = 20
 
 # define the train and val splits
 TRAIN_SPLIT = 0.70
@@ -57,6 +57,21 @@ trainDataLoader = DataLoader(trainData, shuffle=True,
 valDataLoader = DataLoader(valData, batch_size=utils.BATCH_SIZE)
 testDataLoader = DataLoader(testData, batch_size=utils.BATCH_SIZE)
 
+# calculate the train/validation split
+print("[INFO] generating the train/validation split...")
+numTrainSamples = int(len(full_function_dataset) * TRAIN_SPLIT)
+numTestSamples = int(len(full_function_dataset) * TEST_SPLIT)
+numValSamples = int(len(full_function_dataset) * VAL_SPLIT)
+(trainData, testData, valData) = random_split(full_function_dataset,
+                                              [numTrainSamples, numTestSamples, numValSamples],
+                                              generator=torch.Generator().manual_seed(42))
+
+# initialize the train, validation, and test data loaders
+trainDataLoader = DataLoader(trainData, shuffle=True,
+                             batch_size=utils.BATCH_SIZE)
+valDataLoader = DataLoader(valData, batch_size=utils.BATCH_SIZE)
+testDataLoader = DataLoader(testData, batch_size=utils.BATCH_SIZE)
+
 # calculate steps per epoch for training and validation set
 trainSteps = len(trainDataLoader.dataset) // utils.BATCH_SIZE
 testSteps = len(testDataLoader.dataset) // utils.BATCH_SIZE
@@ -79,6 +94,8 @@ H = {
     "val_loss": [],
     "val_acc": []
 }
+train_cost_history = torch.ones(EPOCHS, len(trainDataLoader))
+validation_cost_history = torch.ones(len(valDataLoader))
 
 # measure how long training is going to take
 print("[INFO] training the network...")
@@ -105,6 +122,8 @@ for e in range(0, EPOCHS):
 
     trainLevel = 0
     trainLenght = len(trainDataLoader)
+
+    train_epoch_cost_history = torch.ones(trainLenght)
     First = True
     # loop over the training set
     for sample in trainDataLoader:
@@ -125,7 +144,7 @@ for e in range(0, EPOCHS):
         # perform a forward pass and calculate the training loss
         pred = model(x)
         loss = lossFn(pred, y_ex)
-
+        train_epoch_cost_history[trainLevel] = loss.item()
         # zero out the gradients, perform the backpropagation step,
         # and update the weights
         opt.zero_grad()
@@ -141,12 +160,15 @@ for e in range(0, EPOCHS):
             trainCorrect += 1 if utils.target_close(pred[j], y[j]) else 0
         trainLevel += 1
         print('\r' + str(round(100 * trainLevel / trainLenght, 1)) + '% complete..', end="")
+    train_cost_history[e] = train_epoch_cost_history
     print("Loss of epoch " + str(e) + " " + str(totalTrainLoss.item()))
 
 # switch off autograd for evaluation
 with torch.no_grad():
     # set the model in evaluation mode
     model.eval()
+
+    validationLevel = 0
     First = True
     print("Start validation:")
     # loop over the validation set
@@ -165,18 +187,16 @@ with torch.no_grad():
 
         # make the predictions and calculate the validation loss
         pred = model(x)
-
-        totalValLoss += lossFn(pred, y_ex)
+        loss = lossFn(pred, y_ex)
+        validation_cost_history[validationLevel] = loss.item()
+        totalValLoss += loss
 
         pred = torch.round((pred / label_scaling) - label_shift)
 
         # calculate the number of correct predictions
         for j in range(len(y)):
-            if First:
-                print('Pred', pred[j])
-                print('Target', y[j])
-                First = False
             valCorrect += 1 if utils.target_close(pred[j], y[j]) else 0
+        validationLevel += 1
 
     # calculate the average training and validation loss
     avgTrainLoss = totalTrainLoss / trainSteps
@@ -205,3 +225,5 @@ with torch.no_grad():
         endTime - startTime))
 
 torch.save(model.state_dict(), './model/model.pth')
+torch.save(train_cost_history, 'train_cost_history.pt')
+torch.save(validation_cost_history, 'validation_cost_history.pt')
