@@ -2,7 +2,6 @@ from torch.nn import Module, Flatten, Sequential
 from torch.nn import Conv2d
 from torch.nn import Linear
 from torch.nn import MaxPool2d
-from torch.nn import AvgPool2d
 from torch.nn import ReLU
 
 
@@ -24,9 +23,9 @@ class FrCNet(Module):
             MaxPool2d(2, 2),
 
             Flatten(),
-            Linear(23808, 1012),
+            Linear(23808, 1024),
             ReLU(),
-            Linear(1012, 512),
+            Linear(1024, 512),
             ReLU(),
             Linear(512, output_size),
         )
