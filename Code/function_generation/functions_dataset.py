@@ -25,6 +25,8 @@ class FunctionsDataset(Dataset):
                                 self.function_labels.iloc[idx, 0])
         image = io.imread(img_name)
         image = cv2.cvtColor(image, cv2.COLOR_BGRA2BGR)
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        image = np.expand_dims(image, axis=2)
         labels = self.function_labels.iloc[idx, 1:]
         labels = np.array([labels])
         labels = labels.astype('int').reshape(-1, self.label_dim)

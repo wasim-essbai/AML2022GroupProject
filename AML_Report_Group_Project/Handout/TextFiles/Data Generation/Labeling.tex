@@ -1,0 +1,18 @@
+\subsection{Labeling}
+Another important point is to choose how to label the images. In order to be able to classify mathematical functions unambiguously by means of CNN, it is necessary to label them correctly and without loss of information. The solution chosen is based on the Polish notation.
+First of all, a numerical value is assigned to each basic function and each basic operator in order to encode the mathematical functions as vectors.
+
+To get a unique encoding, a new operator is introduced and it's the one with code 6. This operator represent the function application, e.g. $6 | 12 | 7$, that means "application of function 12 to function 7".
+
+With this choices, each vector has a maximum length of 15, which is reached with a full binary graph of depth 3. Functions with less entries are stretched to the length of 15 by simply adding a padding. This is given by sequences of 6 and 7 towards the end of the vector, where 7 is the code for "identity function". This does not change the actual function, however, thereby it is reached that all vectors posses 15 entries. The following is an example of such a labeling.
+\begin{center}
+	\(f(x) = \sin(x)+|x|\) \\
+	$\Downarrow$ \\ 
+	\(x,1,x,1,x,1,x,1,x,1,x,1,+,sin(x),|x|\)\\
+	$\Downarrow$ \\ 
+	\( (13,9,0,7,6,7,6,7,6,7,6,7,6,7,6) \)\\
+\end{center}
+
+However, from the data generation it was noticed that the maximum length could be never achieved, adding some useless cells. For this reason the output dimension is detected dynamically during the generation and saved in file at the end.
+
+\clearpage
