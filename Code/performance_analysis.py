@@ -4,8 +4,7 @@ import numpy as np
 import os
 import utils
 import pandas
-
-#os.chdir('/content/drive/MyDrive/AML2022GroupProject/Code')
+os.chdir('/content/drive/MyDrive/AML2022GroupProject/Code')
 
 train_cost_history = torch.load('./train_cost_history.pt')
 total_train_cost_history = torch.ones(len(train_cost_history))
@@ -62,18 +61,14 @@ testCorrect = 0
 testCorrectShift2 = 0
 testCorrectShift4 = 0
 for j in range(testLength):
-    if utils.target_close(test_preds[j], test_targets[j], 0):
-        print("Correct")
-        print(test_targets[j])
-        print(test_preds[j])
-    testCorrect += 1 if utils.target_close(test_preds[j], test_targets[j], 0) else 0
-    testCorrectShift2 += 1 if utils.target_close(test_preds[j], test_targets[j], 2) else 0
-    testCorrectShift4 += 1 if utils.target_close(test_preds[j], test_targets[j], 4) else 0
+  testCorrect += 1 if utils.target_close(test_preds[j], test_targets[j]) else 0
+  testCorrectShift2 += 1 if utils.target_close(test_preds[j], test_targets[j], 2) else 0
+  testCorrectShift4 += 1 if utils.target_close(test_preds[j], test_targets[j], 4) else 0
 
-headers = ["Shift", "Accurancy"]
-data = [[0, str(round(100 * testCorrect / testLength, 2)) + '%'],
-        [2, str(round(100 * testCorrectShift2 / testLength, 2)) + '%'],
-        [4, str(round(100 * testCorrectShift4 / testLength, 2)) + '%']]
-print(pandas.DataFrame(data, columns=headers))
+headers=["Shift", "Accurancy"]
+data = [[0, str(round(100 * testCorrect/testLength, 2)) + '%'],
+[2, str(round(100 * testCorrectShift2/testLength, 2)) + '%'],
+[4, str(round(100 * testCorrectShift4/testLength, 2)) + '%']]
+print(pandas.DataFrame(data, columns = headers))
 
 print("End analysis!")

@@ -236,6 +236,7 @@ print("[INFO] total time taken to train the model: {:.2f}s".format(
 # we can now evaluate the network on the test set
 print("[INFO] evaluating network...")
 # turn off autograd for testing evaluation
+
 with torch.no_grad():
     # set the model in evaluation mode
     model.eval()
@@ -243,7 +244,7 @@ with torch.no_grad():
     # initialize a list to store our predictions
     test_preds = torch.ones(len(testDataLoader) * utils.BATCH_SIZE, output_dimension)
     test_targets = torch.ones(len(testDataLoader) * utils.BATCH_SIZE, output_dimension)
-
+    
     testLevel = 0
     # loop over the test set
     for sample in testDataLoader:
@@ -260,12 +261,13 @@ with torch.no_grad():
 
         # make the predictions and add them to the list
         pred = model(x)
-
+        
         pred = torch.round((pred / label_scaling) - label_shift)
+        baseTestLevel = testLevel * len(pred)
         for i in range(len(pred)):
-            test_preds[testLevel + i] = pred[i]
-            test_targets[testLevel + i] = y[i]
-        testLevel = testLevel + 1
+            test_preds[baseTestLevel + i] = pred[i]
+            test_targets[baseTestLevel + i] = y[i]
+        testLevel += 1
 
 
 # plot the training loss and accuracy

@@ -1,7 +1,7 @@
 \subsection{Labeling}
-Another important point is to choose how to label the images. In order to be able to classify mathematical functions unambiguously by means of CNN, it is necessary to label them correctly and without loss of information. The solution chosen is based on the Polish notation.
-First of all, a numerical value is assigned to each basic function and each basic operator in order to encode the mathematical functions as vectors.\\
-To get a unique encoding, a new operator is introduced and it's the one with code 6. This operator represent the function application, e.g. "$6,12,9$" means "application of function 12 to function 9". Here $12$ stands for $\log(x)$ and $9$ for $\sin(x)$, so it translates into "$\log(\sin(x))$".\\
+In order to be able to classify the images by means of CNN, it is necessary to label them correctly. The solution chosen is based on the Polish notation.
+First of all, a numerical value is assigned to each basic function and each basic operator to encode the mathematical functions as vectors.\\
+A new operator is introduced and it's the one with code 6. This operator represents the function application, e.g. "$6,12,9$" means "application of function 12 to function 9". Here $12$ stands for $\log(x)$ and $9$ for $\sin(x)$, so it translates into "$\log(\sin(x))$".\\
 \begin{table}[h!]
 	\centering
 	\begin{tabular}{c|c|c|c|c|c|c|c|c|c|c|c|c|c}
@@ -12,13 +12,6 @@ To get a unique encoding, a new operator is introduced and it's the one with cod
 	\caption{Labeling of vector elements}
 	\label{table:LabelingVector}
 \end{table}\\
-With this choices, each vector has a maximum length of 15, which is reached with a full binary graph of depth 3. Each entry of the vector can have a number between 0 and 13 corresponing to Tabel \ref{table:LabelingVector}. Functions with less entries are stretched to the length of 15 by simply adding a padding. This is given by sequences of 6 and 7 towards the end of the vector, where 7 is the code for "identity function". This does not change the actual function. Thereby it is reached that all vectors posses 15 entries. The following is an example of such a labeling.\\
-\begin{center}
-	\(f(x) = \sin(x)+|x|\) \\
-	$\Downarrow$ \\ 
-	\(x,1,x,1,x,1,x,1,x,1,x,1,+,\sin(x),|x|\)\\
-	$\Downarrow$ \\ 
-	\( (13,9,0,7,6,7,6,7,6,7,6,7,6,7,6) \)\\
-\end{center}
+With this choices, each vector has a maximum length of 15, which is reached with a full binary graph of depth 3. Each entry of the vector can have a number between 0 and 13 corresponing to table \ref{table:LabelingVector}. Functions with less entries are padded. This is given by sequences of 6 and 7 towards the end of the vector. This does not change the actual function. Thereby it is reached that all vectors posses 15 entries. The following is an example of such a labeling. $f(x) = \sin(x)+|x| \Rightarrow x,1,x,1,x,1,x,1,x,1,x,1,+,\sin(x),|x| $\\
+\[ \Rightarrow (13,9,0,7,6,7,6,7,6,7,6,7,6,7,6) \]
 However, from the data generation it was noticed that the maximum length was never achieved, adding some useless cells. For this reason the output dimension is detected dynamically during the generation and saved in the file at the end.
-

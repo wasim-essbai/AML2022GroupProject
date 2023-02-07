@@ -1,5 +1,3 @@
 \subsection{Data Processing}
 
-Before training the model, a simple pre-processing phase is done. This consists in the conversion of images from 4-channel to grey scale. The main reason is make the training process faster.
-
-Furthermore, the labels are converted from integer values to float, for compatiblity reasons. The labels are also scaled by a factor of 1000000, to get more margin between each code.
+Before training the model, the images are converted from 4-channel to grey scale. The main reason is to make the training process faster. The labels are also scaled by a factor of 1000000, to get more margin between each code value.

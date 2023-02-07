@@ -1,7 +1,6 @@
 \subsection{Implementation}
-The implementation of this CNN is made in Python using the framework PyTorch. The definition is showed in the following code.\\
-\begin{lstlisting}
-	self.network = Sequential(
+The implementation of this CNN is made in Python using the framework PyTorch. The definition is showed in the following code.
+\begin{lstlisting}[basicstyle=\tiny,]
 		Conv2d(numChannels, 16, kernel_size=2, padding=1),
 		ReLU(),
 		MaxPool2d(2, 2),
@@ -18,5 +17,4 @@ The implementation of this CNN is made in Python using the framework PyTorch. Th
 		Linear(1012, 512),
 		ReLU(),
 		Linear(512, output_size)
-	)
 \end{lstlisting}

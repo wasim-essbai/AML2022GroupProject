@@ -8,7 +8,7 @@ import pandas
 import os
 os.chdir('/content/drive/MyDrive/AML2022GroupProject/Code')
 
-full = False
+full = True
 
 # set the device we will be using to train the model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
