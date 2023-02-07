@@ -1,0 +1,79 @@
+[INFO] loading the full dataset...
+Dataset length:  50000
+[INFO] generating the train/validation split...
+[INFO] initializing the FrCNet model...
+[INFO] training the network...
+Start training:
+Start of epoch:  0
+ Training: 100.0% complete..
+ Validation: 100.0% complete..
+[INFO] EPOCH: 1/10
+Train loss: 3482709.250000, Train accuracy: 0.0000
+Val loss: 1297278.750000, Val accuracy: 0.0000
+
+Start of epoch:  1
+ Training: 100.0% complete..
+ Validation: 100.0% complete..
+[INFO] EPOCH: 2/10
+Train loss: 1226032.750000, Train accuracy: 0.0035
+Val loss: 1220007.125000, Val accuracy: 0.0035
+
+Start of epoch:  2
+ Training: 100.0% complete..
+ Validation: 100.0% complete..
+[INFO] EPOCH: 3/10
+Train loss: 1214433.250000, Train accuracy: 0.0047
+Val loss: 1217827.000000, Val accuracy: 0.0035
+
+Start of epoch:  3
+ Training: 100.0% complete..
+ Validation: 100.0% complete..
+[INFO] EPOCH: 4/10
+Train loss: 1222696.375000, Train accuracy: 0.0041
+Val loss: 1225385.875000, Val accuracy: 0.0015
+
+Start of epoch:  4
+ Training: 100.0% complete..
+ Validation: 100.0% complete..
+[INFO] EPOCH: 5/10
+Train loss: 1225095.750000, Train accuracy: 0.0029
+Val loss: 1228133.125000, Val accuracy: 0.0015
+
+Start of epoch:  5
+ Training: 100.0% complete..
+ Validation: 100.0% complete..
+[INFO] EPOCH: 6/10
+Train loss: 1226628.625000, Train accuracy: 0.0010
+Val loss: 1216877.875000, Val accuracy: 0.0035
+
+Start of epoch:  6
+ Training: 100.0% complete..
+ Validation: 100.0% complete..
+[INFO] EPOCH: 7/10
+Train loss: 1219964.500000, Train accuracy: 0.0022
+Val loss: 1241651.125000, Val accuracy: 0.0015
+
+Start of epoch:  7
+ Training: 100.0% complete..
+ Validation: 100.0% complete..
+[INFO] EPOCH: 8/10
+Train loss: 1229529.750000, Train accuracy: 0.0007
+Val loss: 1216343.250000, Val accuracy: 0.0015
+
+Start of epoch:  8
+ Training: 100.0% complete..
+ Validation: 100.0% complete..
+[INFO] EPOCH: 9/10
+Train loss: 1223823.875000, Train accuracy: 0.0011
+Val loss: 1217028.125000, Val accuracy: 0.0000
+
+Start of epoch:  9
+ Training: 100.0% complete..
+ Validation: 100.0% complete..
+[INFO] EPOCH: 10/10
+Train loss: 1218013.875000, Train accuracy: 0.0031
+Val loss: 1219997.625000, Val accuracy: 0.0035
+
+[INFO] total time taken to train the model: 6133.22s
+[INFO] evaluating network...
+Model ready!
