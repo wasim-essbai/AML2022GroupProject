@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.24)  7 FEB 2023 18:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.6.24)  7 FEB 2023 19:26
 entering extended mode
 **./main.tex
 (main.tex
@@ -1044,14 +1044,14 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 \openout7 = `main.lot'.
 
  [2]
-<./ImageFiles/general_idea.jpg, id=65, 792.561pt x 337.26pt>
+<./ImageFiles/general_idea.jpg, id=67, 792.561pt x 337.26pt>
 File: ./ImageFiles/general_idea.jpg Graphic file (type jpg)
 <use ./ImageFiles/general_idea.jpg>
 Package pdftex.def Info: ./ImageFiles/general_idea.jpg  used on input line 100.
 
 (pdftex.def)             Requested size: 303.53267pt x 129.16362pt.
  (TextFiles/Data Generation/Algorithm.tex
-<./ImageFiles/Data Generation/ComputationalGraph.jpg, id=69, 298.11375pt x 349.
+<./ImageFiles/Data Generation/ComputationalGraph.jpg, id=71, 298.11375pt x 349.
 305pt>
 File: ./ImageFiles/Data Generation/ComputationalGraph.jpg Graphic file (type jp
 g)
@@ -1075,7 +1075,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [1 <./ImageFiles/general_idea.jpg>] [2 <./ImageFiles/Data Generation/Computatio
 nalGraph.jpg>]
-<./ImageFiles/Data Generation/function_example.png, id=89, 180.675pt x 72.27pt>
+<./ImageFiles/Data Generation/function_example.png, id=91, 180.675pt x 72.27pt>
 
 File: ./ImageFiles/Data Generation/function_example.png Graphic file (type png)
 
@@ -1090,7 +1090,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--16
 
 [3 <./ImageFiles/Data Generation/function_example.png>])
 (TextFiles/CNN/Architecture.tex
-<./ImageFiles/CNN/BasicArch.jpg, id=98, 801.59476pt x 370.986pt>
+<./ImageFiles/CNN/BasicArch.jpg, id=100, 801.59476pt x 370.986pt>
 File: ./ImageFiles/CNN/BasicArch.jpg Graphic file (type jpg)
 <use ./ImageFiles/CNN/BasicArch.jpg>
 Package pdftex.def Info: ./ImageFiles/CNN/BasicArch.jpg  used on input line 5.
@@ -1107,13 +1107,13 @@ File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
 [4 <./ImageFiles/CNN/BasicArch.jpg>]) (TextFiles/Training/Data Processing.tex)
 (TextFiles/Training/Training.tex
-<./ImageFiles/Training/train-cost.png, id=104, 289.08pt x 289.08pt>
+<./ImageFiles/Training/train-cost.png, id=106, 289.08pt x 289.08pt>
 File: ./ImageFiles/Training/train-cost.png Graphic file (type png)
 <use ./ImageFiles/Training/train-cost.png>
 Package pdftex.def Info: ./ImageFiles/Training/train-cost.png  used on input li
 ne 11.
 (pdftex.def)             Requested size: 86.72267pt x 86.72025pt.
-<./ImageFiles/Training/val-cost.png, id=105, 289.08pt x 289.08pt>
+<./ImageFiles/Training/val-cost.png, id=107, 289.08pt x 289.08pt>
 File: ./ImageFiles/Training/val-cost.png Graphic file (type png)
 <use ./ImageFiles/Training/val-cost.png>
 Package pdftex.def Info: ./ImageFiles/Training/val-cost.png  used on input line
@@ -1131,10 +1131,10 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 25820 strings out of 478838
- 455839 string characters out of 2848020
- 1378216 words of memory out of 3000000
- 43314 multiletter control sequences out of 15000+600000
+ 25823 strings out of 478838
+ 455877 string characters out of 2848020
+ 1378275 words of memory out of 3000000
+ 43315 multiletter control sequences out of 15000+600000
  418196 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,12n,122p,10601b,2746s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1157,9 +1157,9 @@ ts/cm/cmr10.pfb><C:/Users/Wasim/AppData/Local/Programs/MiKTeX/fonts/type1/publi
 c/amsfonts/cm/cmr6.pfb><C:/Users/Wasim/AppData/Local/Programs/MiKTeX/fonts/type
 1/public/amsfonts/cm/cmr8.pfb><C:/Users/Wasim/AppData/Local/Programs/MiKTeX/fon
 ts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on main.pdf (8 pages, 504143 bytes).
+Output written on main.pdf (8 pages, 507803 bytes).
 PDF statistics:
- 589 PDF objects out of 1000 (max. 8388607)
- 53 named destinations out of 1000 (max. 500000)
+ 594 PDF objects out of 1000 (max. 8388607)
+ 55 named destinations out of 1000 (max. 500000)
  148 words of extra memory for PDF output out of 10000 (max. 10000000)
 
