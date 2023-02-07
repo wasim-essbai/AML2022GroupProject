@@ -11,6 +11,9 @@
 \usepackage{latexsym}
 \usepackage{hyperref}
 \usepackage{import}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage{caption}
 
 \newcommand{\Fig}[0]{Fig.}
 \newcommand{\Eq}[0]{Eq.}
@@ -112,10 +115,9 @@ url=false
 	\import{./TextFiles/CNN/}{Architecture.tex}
 	\import{./TextFiles/CNN/}{Implementation.tex}
 	
-	\section{Training}
-	First we created a smaller data set consisting of 2000 function plots and the corresponding function vectors. This was again split into 70\% training data, 15\% validation data and 15\% test data. Based on this we tested different sizes of kernels, epochs and learning rates, as there the execution time remained manageable.\\
-	We achieved the highest performance with 2x2 kernels, padding of the first two convolutional layers, 15 epochs, 0.1\% learning rate, and a scaling factor of 1000000, which further separates the closely spaced numbers of vector entries, allowing easier learning of the entries.\\
-	With these parameters found, we could train the CNN on our large dataset (50000). The execution of the training was done GPU-based on Google Colab.
+	\section{Data Processing \& Training}
+	\import{./TextFiles/Training/}{Data Processing.tex}
+	\import{./TextFiles/Training/}{Training.tex}
 
 	\section{Experimental Results}
 	\textcolor{red}{learning curve of loss over epochs and accuracy over epochs, for full vector length and not full vector length (both on the big data set)}

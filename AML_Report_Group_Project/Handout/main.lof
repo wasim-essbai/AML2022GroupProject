@@ -1,12 +1,14 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \babel@toc {english}{}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces Final result to achieve}}{1}{figure.1}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Final result to achieve\relax }}{1}{figure.caption.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2}{\ignorespaces Computational graph example}}{2}{figure.2}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Computational graph example\relax }}{2}{figure.caption.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {3}{\ignorespaces Generated image example}}{3}{figure.3}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Generated image example\relax }}{3}{figure.caption.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4}{\ignorespaces CNN's basic architecture.}}{4}{figure.4}%
+\contentsline {figure}{\numberline {4}{\ignorespaces CNN's basic architecture.\relax }}{4}{figure.caption.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {5}{\ignorespaces Loss vs epochs\relax }}{5}{figure.caption.11}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

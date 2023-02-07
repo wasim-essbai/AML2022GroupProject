@@ -4,7 +4,7 @@ from torch.utils.data import random_split
 from torch.utils.data import DataLoader
 
 # define training hyperparameters
-BATCH_SIZE = 5
+BATCH_SIZE = 500
 # define the train and val splits
 TRAIN_SPLIT = 0.70
 TEST_SPLIT = 0.15
@@ -41,8 +41,7 @@ def get_data_split(full_dataset):
     return trainData, testData, valData
 
 
-def target_close(pred, y):
-    shift = 0
+def target_close(pred, y, shift = 0):
     close = True
     for i in range(len(y) - shift):
         close = close and pred[i + shift] == y[i + shift]

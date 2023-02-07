@@ -17,10 +17,14 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2}Implementation}{4}{subsection.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Training}{5}{section.4}%
+\contentsline {section}{\numberline {4}Data Processing \& Training}{5}{section.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Experimental Results}{5}{section.5}%
+\contentsline {subsection}{\numberline {4.1}Data Processing}{5}{subsection.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Conclusions}{5}{section.6}%
+\contentsline {subsection}{\numberline {4.2}Training}{5}{subsection.4.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}Experimental Results}{6}{section.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}Conclusions}{6}{section.6}%
 \defcounter {refsection}{0}\relax 
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
